@@ -17,8 +17,5 @@ venv/
 # Jupyter Notebooks
 .ipynb_checkpoints
 
-# pyenv
-.python-version
-
 # Mac files
 .DS_Store
