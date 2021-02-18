@@ -1,17 +1,42 @@
 # Python Cookiecutter
 
 ## Prerequisites
-* `pyenv`
-* `poetry`
-* (Optional) `pyright`
+* [`pyenv`](https://github.com/pyenv/pyenv): Python installation manager.
+* [`poetry`](https://github.com/python-poetry/poetry): Python dependency (and packaging) manager.
+* (Optional) [`pyright`](https://github.com/microsoft/pyright): Python language server (and static
+  type checker).
 
 ## Structure
-Creates virtual environment in `.venv` so that `pyright` can be configured to find it.
-
 Configuration adheres to the Python version specified when setting up the project.
 
-`pyenv` is only used to install additional Python versions. The Python executables are then pointed
-to by `poetry` using `poetry env use <path-to-python-executable>`.
+Resulting project structure:
+```bash
+.
+├── <project_name>
+│   └── __init__.py
+├── .gitignore
+├── poetry.toml
+├── .pre-commit-config.yaml
+├── .venv
+│   └── ...
+├── pyproject.toml
+├── pyrightconfig.json
+└── README.md
+```
+
+> This configuration sets up automatic code formatting with [`black`](https://github.com/psf/black)
+> using [`pre-commit`](https://github.com/pre-commit/pre-commit).
+
+### `poetry` and `pyright`
+`poetry` is configured in `poetry.toml` such that it creates the virtual environment in the `.venv`
+directory. This way `pyright` can configure the language server to use that virtual environment
+(using `pyrightconfig.json`).
+
+### `poetry` and `pyenv`
+`pyenv` is only used to manage Python installation, i.e. install different Python versions. The
+Python executables (of a specific Python version) are then pointed to by `poetry` using
+`poetry env use <path-to-python-executable>`. This way the virtual environment managed by `poetry`
+makes use of a specific Python version.
 
 ## Troubleshooting
 Installation of poetry:
@@ -31,6 +56,13 @@ Installation of pyenv:
 # is).
 ```
 
+Installation of pyright:
+```bash
+# `sudo` is needed to run with the global `-g` flag, as we want the
+# language server to be installed globally and not per project.
+sudo npm install -g pyright
+```
+
 Installation of a specific Python version (using pyenv):
 ```bash
 # Check the available versions
@@ -42,6 +74,9 @@ pyenv install 3.9.0
 
 `pre-commit` blocks `git commit` due to `Executable ... not found`:
 ```bash
+# This issue should only occur if you specify `local` as the `repo` in
+# `.pre-commit-config.yaml` and add the package to `pyproject.toml`.
+
 # Make sure to activate the virtual environment. Otherwise pre-commit
 # will try to use the executable of the installed Python version,
 # instead of the one installed in the environment.

@@ -1,6 +1,7 @@
 {
     "project_name": "boilerplate",
     "python_version": "3.9.0",
+    "pre_commit": "y",
     "author": "Yannick Perrenet",
     "email": "example@gmail.com"
 }

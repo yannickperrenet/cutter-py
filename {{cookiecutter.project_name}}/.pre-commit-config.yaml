@@ -5,7 +5,8 @@ default_language_version:
     python: python{{cookiecutter.python_version}}
 
 repos:
-- repo: local
+- repo: https://github.com/psf/black
+  rev: 20.8b1
   hooks:
     - id: black
       name: black

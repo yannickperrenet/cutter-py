@@ -10,8 +10,9 @@ authors = ["{{cookiecutter.author}} <{{cookiecutter.email}}>"]
 python = "^{{cookiecutter.python_version}}"
 
 [tool.poetry.dev-dependencies]
+{% if cookiecutter.pre_commit == 'y' %}
 pre-commit = "*"
-black = "*"
+{% endif %}
 
 [tool.black]
 exclude = '''
