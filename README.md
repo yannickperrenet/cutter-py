@@ -46,10 +46,13 @@ pip install poetry
 
 Installation of pyenv:
 ```bash
-# Clone into /opt/pyenv
+# Clone into ~/.opt/pyenv
+# That path is chosen instead of /opt/pyenv because pyenv will install
+# Python versions to `$PYENV_ROOT/versions` and so would run into
+# permission issues.
 
 # Set `PYENV_ROOT` in your profile to point to the installation.
-# PYENV_ROOT=/opt/pyenv
+# PYENV_ROOT=/home/$USER/.opt/pyenv
 
 # Symlink the `pyenv` executable in `~/.local/bin` so you don't have to
 # alter your `$PATH` (under the assumption that `~/.local/bin` already
@@ -97,12 +100,3 @@ poetry env use $PYENV_ROOT/versions/3.6.0/bin/python
 # Or use `pyenv prefix 3.6.0` to get the path to the version directory.
 ```
 > Note that using this same principle you can manage multiple Python versions.
-
-## WIP
-TODO:
-* Add pyenv and poetry to iscripts (and remove virtualenv)
-* Add alias or script for `cookiecutter gh:yannickperrenet/cutter-` so it can be called like
-  `cutter py`
-* Make cookiecutter adhere to XDG
-    * https://cookiecutter.readthedocs.io/en/1.7.2/advanced/user_config.html
-    * Set `$COOKIECUTTER_CONFIG` and in the config file set the `cookiecutters_dir` and `replay_dir`
